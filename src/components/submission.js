@@ -41,46 +41,62 @@ class Status extends Component{
 
     render(){
 
-    
+        let button = null
+
+        let list = null
+
+        let heading = <Card> <h1>No Data To Show</h1></Card>
+
         const listStyling = {
             'list-style-type': 'none'
         }
 
-        let button = null
+        
 
         if(this.state.form){
-         button = <Button submissionButton onClick={this.removeMOC}>
-                        Remove this MOC
+         button = <Button auto onClick={this.removeMOC}>
+                        Remove Item
                     </Button>
         }
 
-        return (
-            
-            <div>
+        
+
+        if(this.state.form !== null){
+            list =  Object.keys(this.state.form).map( fieldName => {
+                return (
+                    <Card>
+                    <li>{fieldName} - {this.state.form[fieldName]}</li>
+                    </Card>
+                )
+            })
+        }
+
+        if(this.state.form){
+            heading = (<div>
             <Card>
             <h1> Your Form Is Submitted</h1>
             </Card>
             <Card>
             <h2>Please see your data here</h2>
             </Card>
-            <ul style={listStyling}>
-        {
-            Object.keys(this.state.form).map( fieldName => {
-            return (
-                <Card>
-                <li>{fieldName} - {this.state.form[fieldName]}</li>
-                </Card>
-            )
-        })
+            </div>)
         }
-        </ul>
 
-        {button}
+        return (
+            
+            <React.Fragment>
+            {heading}
+            
+            <ul style={listStyling}>
+             { list}
+            </ul>
+
+            {button}
         
-        <Button submissionButton onClick={this.goBackHandler}>
+            <Button auto onClick={this.goBackHandler}>
             Go Back
-        </Button>
-        </div>
+            </Button>
+            </React.Fragment>
         )
 
         

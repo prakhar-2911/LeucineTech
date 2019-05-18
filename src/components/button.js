@@ -12,7 +12,7 @@ const StyledButton = styled.button`
   border-radius: 3px;
   cursor: pointer;
   outline: none;
-  width: 100%;
+  width:  ${props => (props.auto ? 'auto' : '100%')};
   ${props => props.big && css`
     padding: 1rem;
     font-size: 1rem;
